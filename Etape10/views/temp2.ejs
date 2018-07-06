@@ -1,0 +1,25 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <h1>Information sur la température</h1>
+  </head>
+  
+  <body>
+  <p id =temps>En attente des informations sur la température...</p>
+  </body>
+  
+  <script src="/socket.io/socket.io.js"></script>
+  
+  <script>
+    var socket = io();
+
+    socket.on('temperature', function(result){
+      console.log(result);
+      var p = document.getElementById('temps');
+      //result.forEach(function(element) {
+        //console.log(element);
+        p.innerHTML = "La température est de " + result['ops']['0']['temperature'] + "°C   à "+ result['ops']['0']['heure'] + ", le " +result['ops']['0']['date'];
+        //});
+    });
+  </script>
+</html>

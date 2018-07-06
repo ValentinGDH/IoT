@@ -1,0 +1,32 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <h1>Information sur la température</h1>
+  </head>
+  
+  <body>
+  <p id =temps></p>
+  </body>
+  
+  <script src="/socket.io/socket.io.js"></script>
+  
+  <script>
+    var socket = io();
+
+    socket.on('temperature', function(result){
+
+      var now = new Date();
+
+      var annee   = now.getFullYear();
+      var mois    = now.getMonth() + 1;
+      var jour    = now.getDate();
+      var heure   = now.getHours();
+      var minute  = now.getMinutes();
+      var seconde = now.getSeconds();
+
+      var p = document.getElementById('temps');
+      console.log(result)
+      p.innerHTML = "La température est de " + result + "°C   à " + heure+ "h " +minute+ "min " +seconde+ "sec, le " +jour+"/"+mois+"/"+annee ;
+    });
+  </script>
+</html>
